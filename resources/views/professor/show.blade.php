@@ -5,3 +5,4 @@
     <p>Nome: {{$professor->nome}}</p>
     <p>Disciplina: {{$professor->disciplina}}</p>
 @endsection
+.
