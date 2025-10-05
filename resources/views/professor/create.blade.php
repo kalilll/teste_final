@@ -15,4 +15,3 @@
         <button class="btn btn-dark" type="submit">Enviar</button>
     </form>
 @endsection
-.

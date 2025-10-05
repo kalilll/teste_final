@@ -8,4 +8,3 @@
     <p class="form-control">Data de Nascimento: {{$aluno->data_nascimento}}</p>
     <img class="rounded-circleed" src="{{ asset($aluno->foto) }}" alt="Foto do Aluno" style="max-width: 300px; max-height: 300px;">
 @endsection
-.

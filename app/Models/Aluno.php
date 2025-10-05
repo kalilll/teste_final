@@ -11,4 +11,3 @@ class Aluno extends Model
     protected $fillable = ['matricula','nome','email','data_nascimento', 'foto'];
     public $timestamps = false;
 }
-.
