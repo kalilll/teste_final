@@ -27,7 +27,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDJucWxvYnV6MmQwdmw5aDUzMDllYTR1eDQ5YzdwbjVpejlrZmIwYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oeS2n25LaP4kXpjatz/giphy.gif">Link</a>
+                <a class="nav-link" href="https://media.tenor.com/xSXTkAlLjbgAAAAM/homer.gif">Link</a>
             </li>
         </ul>
     </div>

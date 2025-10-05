@@ -8,6 +8,6 @@ class Professor extends Model
 {
     //
     protected $table = "professor";
-    protected $fillable = ['id','nome','disciplina'];
+    protected $fillable = ['nome','disciplina','foto'];
     public $timestamps = false;
 }

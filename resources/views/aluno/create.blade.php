@@ -9,10 +9,12 @@
                 <label for="">Matricula</label>
                 <input type="text" class="form-control" name="matricula" id="matricula" placeholder="000">
             </div>
+
             <div  class="form-group">
                <label for="">Nome</label>
                 <input type="text" class="form-control" name="nome" id="nome" placeholder="Seu Nome">
             </div>
+
             <div class="form-group">
                 <label for="">Email</label>
                 <div class="input-group mb-3">
@@ -21,20 +23,22 @@
                 </div>
                 <input type="text" class="form-control" name="email" id="email" placeholder="nome@exemplo.com">
             </div>
+
             <div  class="form-group">
              <label for="">Data de Nascimento</label>
                 <input type="date" class="form-control" name="data_nascimento" id="data_nascimento">  
             </div> 
+
             <div class="form-group">
                 <div class="form-control">
-                    <label for="foto" class="form-label">Foto</label>
-                    <input type="file"  name="foto" id="foto">
+                    <label for="fotoAluno" class="form-label">Foto</label>
+                    <input type="file"  name="fotoAluno" id="fotoAluno">
                 </div>
             </div>
             
             <button class="btn btn-dark" type="submit">Enviar</button>
         
-    </form> 
+        </form> 
     </div>
     
 @endsection

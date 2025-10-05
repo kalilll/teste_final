@@ -14,13 +14,7 @@ class AlunoController extends Controller
     {
         $alunos = Aluno::all(); 
         return view('aluno.index', compact('alunos'));
-    }
-
-    public function contato()
-    {
-        return view('aluno.contato');
-    }
-    
+    }    
     /**
      * Show the form for creating a new resource.
      */
@@ -35,11 +29,11 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        $nome_arquivo = pathinfo($request->foto->getClientOriginalName(), PATHINFO_FILENAME);
-        $extensao_arquivo = $request->foto->getClientOriginalExtension();
+        $nome_arquivo = pathinfo($request->fotoAluno->getClientOriginalName(), PATHINFO_FILENAME);
+        $extensao_arquivo = $request->fotoAluno->getClientOriginalExtension();
         $foto = $nome_arquivo . '-' . time() . '.' . $extensao_arquivo;
 
-        $request->foto->move(public_path('imagens'), $foto);
+        $request->fotoAluno->move(public_path('imagens/Aluno/'), $foto);
 
 
 
@@ -48,7 +42,7 @@ class AlunoController extends Controller
             'nome' => $request->nome,
             'email' => $request->email,
             'data_nascimento' => $request->data_nascimento,
-            'foto' => 'imagens/' . $foto
+            'foto' => 'imagens/Aluno/' . $foto
         ]);
 
         return redirect()->route('aluno.index');
@@ -79,19 +73,19 @@ class AlunoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $nome_arquivo = pathinfo($request->foto->getClientOriginalName(), PATHINFO_FILENAME);
-        $extensao_arquivo = $request->foto->getClientOriginalExtension();
+        $nome_arquivo = pathinfo($request->fotoAluno->getClientOriginalName(), PATHINFO_FILENAME);
+        $extensao_arquivo = $request->fotoAluno->getClientOriginalExtension();
         $foto = $nome_arquivo . '-' . time() . '.' . $extensao_arquivo;
         
 
-        $request->foto->move(public_path('imagens'), $foto);
+        $request->fotoAluno->move(public_path('imagens/Aluno/'), $foto);
     
         Aluno::find($id)->update([
             'matricula' => $request->matricula,
             'nome' => $request->nome,
             'email' => $request->email,
             'data_nascimento' => $request->data_nascimento,
-            'foto' => 'imagens/' . $foto
+            'foto' => 'imagens/Aluno/' . $foto
         ]);
         return redirect()->route('aluno.index');
     }

@@ -31,7 +31,17 @@ class ProfessorController extends Controller
      */
     public function store(Request $request)
     {
-        Professor::create($request->all());
+        $nome_arquivo = pathinfo($request->fotoProfessor->getClientOriginalName(), PATHINFO_FILENAME);
+        $extensao_arquivo = $request->fotoProfessor->getClientOriginalExtension();
+        $foto = $nome_arquivo . '-' . time() . '.' . $extensao_arquivo;
+
+        $request->fotoProfessor->move(public_path('imagens/Professor/'), $foto);
+
+        Professor::create([
+            'nome' => $request->nome,
+            'disciplina' => $request->disciplina,
+            'foto' => 'imagens/Professor/' . $foto
+        ]);
 
         return redirect()->route('professor.index');
     }
@@ -60,7 +70,18 @@ class ProfessorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Professor::find($id)->update($request->all());
+        $nome_arquivo = pathinfo($request->fotoProfessor->getClientOriginalName(), PATHINFO_FILENAME);
+        $extensao_arquivo = $request->fotoProfessor->getClientOriginalExtension();
+        $foto = $nome_arquivo . '-' . time() . '.' . $extensao_arquivo;
+        
+
+        $request->fotoProfessor->move(public_path('imagens/Professor/'), $foto);
+
+        Professor::find($id)->update([
+            'nome' => $request->nome,
+            'disciplina' => $request->disciplina,
+            'foto' => 'imagens/Professor/' . $foto
+        ]);
         return redirect()->route('professor.index');
     }
 
