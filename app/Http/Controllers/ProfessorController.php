@@ -75,4 +75,3 @@ class ProfessorController extends Controller
         //
     }
 }
-.

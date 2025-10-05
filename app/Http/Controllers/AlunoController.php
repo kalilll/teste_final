@@ -107,4 +107,3 @@ class AlunoController extends Controller
         //
     }
 }
-.
