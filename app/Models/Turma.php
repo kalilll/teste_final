@@ -10,4 +10,9 @@ class Turma extends Model
     protected $table = "turma";
     protected $fillable = ['descricao', 'curso_id'];
     public $timestamps = false;
+
+    public function curso()
+    {
+        return $this->belongsTo(Curso::class);
+    }
 }
