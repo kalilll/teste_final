@@ -29,6 +29,15 @@
             <label for="">Foto</label>
             <input type="file" name="fotoAluno" id="fotoAluno" value="{{$aluno->foto}}">
         </div>
+
+        <div>
+            <label for="">Turma</label>
+            <select class="form-control" name="turma_id" id="turma_id">
+                <option value="">Selecione</option>
+                @foreach($turmas as $turma)
+                    <option value="{{$turma->id}}">{{$turma->descricao}}</option>
+                @endforeach
+            </select>
         <button class="btn btn-dark" type="submit">Salvar</button>
     </form>
 @endsection

@@ -8,6 +8,7 @@
     <table class="table table-striped table-hover table-sm" >
         <thead class="thead-dark">
             <th>Nome do Curso</th>
+            <th>Opções</th>
         </thead>
         <tbody>
             @foreach($cursos as $curso)

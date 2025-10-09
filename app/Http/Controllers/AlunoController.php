@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Aluno;   
+use App\Models\Turma;   
 
 class AlunoController extends Controller
 {
@@ -21,7 +22,8 @@ class AlunoController extends Controller
     public function create()
     {
         //
-        return view('aluno.create');
+        $turmas = Turma::all();
+        return view('aluno.create', compact('turmas'));
     }
 
     /**
@@ -37,13 +39,15 @@ class AlunoController extends Controller
 
 
 
-        Aluno::create([
+        $aluno = Aluno::create([
             'matricula' => $request->matricula,
             'nome' => $request->nome,
             'email' => $request->email,
             'data_nascimento' => $request->data_nascimento,
             'foto' => 'imagens/Aluno/' . $foto
         ]);
+
+        $aluno->turmas()->attach($request->turma_id);
 
         return redirect()->route('aluno.index');
     }
@@ -64,7 +68,8 @@ class AlunoController extends Controller
     public function edit(string $id)
     {
         $aluno = Aluno::find($id);
-        return view('aluno.edit', compact('aluno'));
+        $turmas = Turma::all();
+        return view('aluno.edit', compact('aluno', 'turmas'));
 
     }
 
@@ -80,13 +85,16 @@ class AlunoController extends Controller
 
         $request->fotoAluno->move(public_path('imagens/Aluno/'), $foto);
     
-        Aluno::find($id)->update([
+        $aluno= Aluno::find($id)->update([
             'matricula' => $request->matricula,
             'nome' => $request->nome,
             'email' => $request->email,
             'data_nascimento' => $request->data_nascimento,
             'foto' => 'imagens/Aluno/' . $foto
         ]);
+
+        $aluno->turmas()->syncWithoutDetaching($request->turma_id);
+        
         return redirect()->route('aluno.index');
     }
 

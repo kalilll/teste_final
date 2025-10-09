@@ -8,11 +8,14 @@
     <table class="table table-striped table-hover table-sm" >
         <thead class="thead-dark">
             <th>Descrição da Turma</th>
+            <th>Curso</th>
+            <th>Opções</th>
         </thead>
         <tbody>
             @foreach($turmas as $turma)
             <tr>
                 <td>{{$turma->descricao}}</td>
+                <td>{{$turma->curso-> nome}}</td>
                 <td>
                     <div class="d-flex">
                         <div class="m-1">

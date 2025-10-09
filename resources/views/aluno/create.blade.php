@@ -35,6 +35,16 @@
                     <input type="file"  name="fotoAluno" id="fotoAluno">
                 </div>
             </div>
+
+            <div>
+                <label for="">Turma</label>
+                <select class="form-control" name="turma_id" id="turma_id">
+                    <option value="">Selecione</option>
+                    @foreach($turmas as $turma)
+                        <option value="{{$turma->id}}">{{$turma->descricao}}</option>
+                    @endforeach
+                </select>
+            </div>
             
             <button class="btn btn-dark" type="submit">Enviar</button>
         
