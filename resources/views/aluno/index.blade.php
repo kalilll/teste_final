@@ -11,6 +11,7 @@
             <th>Nome</th>
             <th>Email</th>
             <th>Data de nascimento</th>
+            <th>Telefone</th>
             <th>Opções</th>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@
                 <td>{{$aluno->nome}}</td>
                 <td>{{$aluno->email}}</td>
                 <td>{{$aluno->data_nascimento}}</td>
+                <td>{{$aluno->contatoAluno->telefone}}</td>
                 <td>
                     <div class="d-flex">
                         <div class="m-1">

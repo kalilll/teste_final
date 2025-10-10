@@ -6,5 +6,6 @@
     <p class="form-control">Nome: {{$aluno->nome}}</p>
     <p class="form-control">Email: {{$aluno->email}}</p>
     <p class="form-control">Data de Nascimento: {{$aluno->data_nascimento}}</p>
+    <p class="form-control">Telefone: {{$aluno->contato->telefone}}</p>
     <img src="{{ asset($aluno->foto) }}" alt="Foto do Aluno" style="max-width: 300px; max-height: 300px;">
 @endsection

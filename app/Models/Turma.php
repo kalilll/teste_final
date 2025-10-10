@@ -18,6 +18,6 @@ class Turma extends Model
 
     public function alunos()
     {
-        return $this->belongsToMany(Aluno::class, 'turma_aluno');
+        return $this->belongsToMany(Aluno::class, 'turma_aluno', 'turma_id', 'aluno_id');
     }
 }

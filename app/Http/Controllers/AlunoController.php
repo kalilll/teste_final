@@ -49,17 +49,22 @@ class AlunoController extends Controller
 
         $aluno->turmas()->attach($request->turma_id);
 
+        $aluno->contatoAluno()->create([
+            'telefone' => $request->telefone
+        ]);
+        
         return redirect()->route('aluno.index');
     }
-
+    
     /**
      * Display the specified resource.
-     */
+    */
     public function show(string $id)
     {
         $aluno= Aluno::find($id);
         return view('aluno.show', compact('aluno'));
         //
+
     }
 
     /**
@@ -94,6 +99,10 @@ class AlunoController extends Controller
         ]);
 
         $aluno->turmas()->syncWithoutDetaching($request->turma_id);
+
+         $aluno->contatoAluno()->update([
+            'telefone' => $request->telefone
+        ]);
         
         return redirect()->route('aluno.index');
     }

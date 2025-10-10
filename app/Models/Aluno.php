@@ -13,6 +13,11 @@ class Aluno extends Model
 
     public function turmas()
     {
-        return $this->belongsToMany(Turma::class, 'turma_aluno');
+        return $this->belongsToMany(Turma::class, 'turma_aluno', 'aluno_id', 'turma_id');
     }
+
+    public function contatoAluno()
+    {
+        return $this->hasOne(ContatoAluno::class);
+    } 
 }
