@@ -36,4 +36,21 @@
                 
         </tbody>
     </table>
-@endsection
+
+    <div>
+        <h3>Cursos diferentes de Informática</h3>
+        <ul>
+            @foreach($curso_dife_info as $curso)
+                <li>{{$curso->nome}}</li>
+            @endforeach
+        </ul>
+    </div>
+    <div>
+        <h3>Cursos iguais a Administração ou Gestão</h3>
+        <ul>
+            @foreach($curso_nome_igual as $curso)
+                <li>{{$curso->nome}}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endsection

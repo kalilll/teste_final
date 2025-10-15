@@ -40,4 +40,12 @@
             @endforeach 
         </tbody>
     </table>
+        <div>
+            <h3>Professores com João e Silva:</h3>
+            <ul>
+            @foreach($professor_JoaoSilva as $professor)
+                <li>{{$professor->nome}}</li>
+            @endforeach
+            </ul>
+        </div>
 @endsection

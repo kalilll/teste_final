@@ -16,8 +16,14 @@ class AlunoController extends Controller
         $alunos = Aluno::all(); 
         $turmas = Turma::all(); 
 
-        
-        return view('aluno.index', compact('alunos', 'turmas'));
+        $alunos_nasci_10_05_2005 = Aluno::where('data_nascimento', '2005-05-10')->get();
+        $alunos_nasci_antes_01_01_2006 = Aluno::whereDate('data_nascimento','<', '2005-05-10')->get();
+        $alunos_nasci_entre = Aluno::whereBetween('data_nascimento', ['2004-01-01', '2006-12-31'])->get();
+        $alunos_Silva = Aluno::where('nome', 'like', '%Silva%')->get(); 
+        $alunos_data_email = Aluno::whereDate('data_nascimento', '>', '2005-01-01')->where('email', 'like', '%@gmail.com%')
+                                  ->get();
+
+        return view('aluno.index', compact('alunos', 'turmas', 'alunos_nasci_10_05_2005', 'alunos_nasci_antes_01_01_2006', 'alunos_nasci_entre', 'alunos_Silva', 'alunos_data_email'));
     }    
     /**
      * Show the form for creating a new resource.

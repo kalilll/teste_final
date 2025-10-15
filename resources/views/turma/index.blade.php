@@ -38,4 +38,19 @@
                 
         </tbody>
     </table>
+
+    <div>
+        <h3>Turmas com id Maior que 10:</h3>
+        <ul>
+            @foreach($turma_id_maior_10 as $turma)
+                <li>{{$turma->descricao}}</li>
+            @endforeach
+        </ul>
+    </div>   
+    <div>
+        <h3>Quantidade de Turmas:</h3>
+        <ul>
+            <li>{{$turmas_quant}}</li>
+        </ul>
+    </div>
 @endsection

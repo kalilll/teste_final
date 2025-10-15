@@ -13,7 +13,10 @@ class CursoController extends Controller
     public function index()
     {
         $cursos = Curso::all(); 
-        return view('curso.index', compact('cursos'));
+
+        $curso_dife_info = Curso::where('nome', '!=', 'Informática')->get();
+        $curso_nome_igual= Curso::where('nome', 'Administração')->orWhere('nome', 'Gestão')->get();
+        return view('curso.index', compact('cursos', 'curso_dife_info', 'curso_nome_igual'));
     }    
     /**
      * Show the form for creating a new resource.

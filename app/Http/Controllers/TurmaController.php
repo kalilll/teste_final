@@ -14,7 +14,12 @@ class TurmaController extends Controller
     public function index()
     {
         $turmas = Turma::all(); 
-        return view('turma.index', compact('turmas'));
+
+        $turma_id_maior_10 = Turma::where('id', '>', 10)->get();   
+
+        $turmas_quant = Turma::count();
+
+        return view('turma.index', compact('turmas', 'turma_id_maior_10', 'turmas_quant'));
     }    
     /**
      * Show the form for creating a new resource.

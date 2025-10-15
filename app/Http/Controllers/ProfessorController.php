@@ -13,7 +13,9 @@ class ProfessorController extends Controller
     public function index()
     {
         $professores = Professor::all(); 
-        return view('professor.index', compact('professores'));
+
+        $professor_JoaoSilva = Professor::where('nome', 'like','João%')->where('nome', 'like', '%Silva')->get();
+        return view('professor.index', compact('professores', 'professor_JoaoSilva'));
     }
 
     

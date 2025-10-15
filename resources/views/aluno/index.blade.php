@@ -50,5 +50,51 @@
         </tbody>
     </table>
 
+    <div>
+        <div>
+            <h3>Alunos Nascidos em 10/05/2005</h3>
+            <ul>
+                @foreach($alunos_nasci_10_05_2005 as $aluno)
+                <li>{{$aluno->nome}}</li>
+                @endforeach
+            </ul>
+        </div>
+
+        <div>
+            <h3>Alunos Nascidos antes de 01/01/2006</h3>
+            <ul>
+                @foreach($alunos_nasci_antes_01_01_2006 as $aluno)
+                <li>{{$aluno->nome}}</li>
+                @endforeach
+            </ul>
+        </div>
+
+        <div>
+            <h3>Alunos Nascidos entre 2004 e 2006</h3>
+            <ul>
+                @foreach($alunos_nasci_entre as $aluno)
+                <li>{{$aluno->nome}}</li>
+                @endforeach
+            </ul>
+        </div>
+
+        <div>
+            <h3>Alunos com 'Silva' no nome</h3>
+            <ul>
+                @foreach($alunos_Silva as $aluno)
+                <li>{{$aluno->nome}}</li>
+                @endforeach
+            </ul>
+        </div>
+        <div>
+            <h3>Alunos que nasceram pós 01-01-2005 e tem Gmail: </h3>
+            <ul>
+                @foreach($alunos_data_email as $aluno)
+                <li>{{$aluno->nome}}</li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
     
 @endsection
