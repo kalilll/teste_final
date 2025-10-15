@@ -16,6 +16,11 @@
         </div>
 
         <div class="form-group">
+            <label for="">Telefone</label>
+            <input type="text" class="form-control" name="telefone" id="telefone" value="{{$aluno->contatoAluno->telefone}}">
+        </div>
+        
+        <div class="form-group">
             <label for="">Email</label>
             <input type="text" class="form-control" name="email" id="email" value="{{$aluno->email}}">
         </div>
@@ -24,12 +29,8 @@
             <label for="">Data de Nascimento</label>
             <input type="date" class="form-control" name="data_nascimento" id="data_nascimento" value="{{$aluno->data_nascimento}}">
         </div>
-
-        <div class="form-group">
-            <label for="">Foto</label>
-            <input type="file" name="fotoAluno" id="fotoAluno" value="{{$aluno->foto}}">
-        </div>
         
+
         <div>
             <label for="">Turma</label>
             <select class="form-control" name="turma_id" id="turma_id">
@@ -38,11 +39,13 @@
                 <option value="{{$turma->id}}">{{$turma->descricao}}</option>
                 @endforeach
             </select>
-
-            <div class="form-group">
-                <label for="">Telefone</label>
-                <input type="file" name="telefone" id="telefone" value="{{$aluno->contatoAluno->telefone}}">
-            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="">Foto</label>
+            <input type="file"  name="fotoAluno" id="fotoAluno" value="{{$aluno->foto}}">
+        </div>
+        
             <button class="btn btn-dark" type="submit">Salvar</button>
     </form>
 @endsection

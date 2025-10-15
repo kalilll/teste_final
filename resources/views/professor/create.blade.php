@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title','Formulario')
 @section('content')
-    <h1>Cadastro de professores</h1>
+    <h1>Cadastro de Professor</h1>
     <form action="{{route("professor.store")}}" method="post" enctype="multipart/form-data">
         @csrf 
         <div class="form-group">
@@ -15,10 +15,19 @@
         </div>
 
         <div class="form-group">
-                <div class="form-control">
-                    <label for="fotoProfessor" class="form-label">Foto</label>
-                    <input type="file"  name="fotoProfessor" id="fotoProfessor">
-                </div>
+            <label for="">Telefone</label>
+            <input type="text" class="form-control" name="telefone" id="telefone" placeholder="(00) 00000-0000">
+        </div>
+        <div class="form-group">
+            <label for="">Email</label>
+            <input type="text" class="form-control" name="email" id="email" placeholder="example@gmail.com">
+        </div>
+
+        <div class="form-group">
+            <label for="fotoProfessor">Foto</label>
+            <input type="file"  name="fotoProfessor" id="fotoProfessor">
+        </div>
+
         <button class="btn btn-dark" type="submit">Enviar</button>
     </form>
 @endsection

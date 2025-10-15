@@ -14,7 +14,10 @@ class AlunoController extends Controller
     public function index()
     {
         $alunos = Aluno::all(); 
-        return view('aluno.index', compact('alunos'));
+        $turmas = Turma::all(); 
+
+        
+        return view('aluno.index', compact('alunos', 'turmas'));
     }    
     /**
      * Show the form for creating a new resource.
@@ -31,13 +34,14 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        $nome_arquivo = pathinfo($request->fotoAluno->getClientOriginalName(), PATHINFO_FILENAME);
-        $extensao_arquivo = $request->fotoAluno->getClientOriginalExtension();
-        $foto = $nome_arquivo . '-' . time() . '.' . $extensao_arquivo;
+        $foto= null;
+        if($request->hasFile('fotoAluno')){
+            $nome_arquivo = pathinfo($request->fotoAluno->getClientOriginalName(), PATHINFO_FILENAME);
+            $extensao_arquivo = $request->fotoAluno->getClientOriginalExtension();
+            $foto = $nome_arquivo . '-' . time() . '.' . $extensao_arquivo;
 
-        $request->fotoAluno->move(public_path('imagens/Aluno/'), $foto);
-
-
+            $request->fotoAluno->move(public_path('imagens/Aluno/'), $foto);
+        };
 
         $aluno = Aluno::create([
             'matricula' => $request->matricula,
@@ -83,14 +87,21 @@ class AlunoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $nome_arquivo = pathinfo($request->fotoAluno->getClientOriginalName(), PATHINFO_FILENAME);
-        $extensao_arquivo = $request->fotoAluno->getClientOriginalExtension();
-        $foto = $nome_arquivo . '-' . time() . '.' . $extensao_arquivo;
-        
+        $aluno = Aluno::find($id);
 
-        $request->fotoAluno->move(public_path('imagens/Aluno/'), $foto);
-    
-        $aluno= Aluno::find($id)->update([
+        if (!$aluno) {
+            return redirect()->route('aluno.index');
+        }
+        $foto= null;
+        if($request->hasFile('fotoAluno')){
+            $nome_arquivo = pathinfo($request->fotoAluno->getClientOriginalName(), PATHINFO_FILENAME);
+            $extensao_arquivo = $request->fotoAluno->getClientOriginalExtension();
+            $foto = $nome_arquivo . '-' . time() . '.' . $extensao_arquivo;
+                    
+            $request->fotoAluno->move(public_path('imagens/Aluno/'), $foto);
+        };
+
+        $aluno->update([
             'matricula' => $request->matricula,
             'nome' => $request->nome,
             'email' => $request->email,
@@ -100,7 +111,7 @@ class AlunoController extends Controller
 
         $aluno->turmas()->syncWithoutDetaching($request->turma_id);
 
-         $aluno->contatoAluno()->update([
+        $aluno->contatoAluno()->update([
             'telefone' => $request->telefone
         ]);
         

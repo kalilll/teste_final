@@ -10,7 +10,7 @@
                <label for="">Descrição da Turma</label>
                 <input type="text" class="form-control" name="descricao" id="descricao" placeholder="Descrição da Turma">
             </div>
-            <div  class="form-group>
+            <div  class="form-group">
                 <label for="">Curso</label>
                 <select class="form-control" name="curso_id" id="curso_id">
                     <option value="">Selecione</option>

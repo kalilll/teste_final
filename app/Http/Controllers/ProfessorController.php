@@ -31,16 +31,24 @@ class ProfessorController extends Controller
      */
     public function store(Request $request)
     {
-        $nome_arquivo = pathinfo($request->fotoProfessor->getClientOriginalName(), PATHINFO_FILENAME);
-        $extensao_arquivo = $request->fotoProfessor->getClientOriginalExtension();
-        $foto = $nome_arquivo . '-' . time() . '.' . $extensao_arquivo;
+        $foto= null;
+        if($request->hasFile('fotoProfessor')){
+            $nome_arquivo = pathinfo($request->fotoProfessor->getClientOriginalName(), PATHINFO_FILENAME);
+            $extensao_arquivo = $request->fotoProfessor->getClientOriginalExtension();
+            $foto = $nome_arquivo . '-' . time() . '.' . $extensao_arquivo;
 
-        $request->fotoProfessor->move(public_path('imagens/Professor/'), $foto);
+            $request->fotoProfessor->move(public_path('imagens/Professor/'), $foto);
+        };
 
-        Professor::create([
+        $professor= Professor::create([
             'nome' => $request->nome,
             'disciplina' => $request->disciplina,
             'foto' => 'imagens/Professor/' . $foto
+        ]);
+
+        $professor->contatoProfessor()->create([
+            'telefone' => $request->telefone,
+            'email' => $request->email
         ]);
 
         return redirect()->route('professor.index');
@@ -70,18 +78,34 @@ class ProfessorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $nome_arquivo = pathinfo($request->fotoProfessor->getClientOriginalName(), PATHINFO_FILENAME);
-        $extensao_arquivo = $request->fotoProfessor->getClientOriginalExtension();
-        $foto = $nome_arquivo . '-' . time() . '.' . $extensao_arquivo;
+        $professor = Professor::find($id);
+
+        if (!$professor) {
+            return redirect()->route('professor.index');
+        }
         
+        $foto= null;
+        if($request->hasFile('fotoAluno')){
+            $nome_arquivo = pathinfo($request->fotoProfessor->getClientOriginalName(), PATHINFO_FILENAME);
+            $extensao_arquivo = $request->fotoProfessor->getClientOriginalExtension();
+            $foto = $nome_arquivo . '-' . time() . '.' . $extensao_arquivo;
+                    
 
-        $request->fotoProfessor->move(public_path('imagens/Professor/'), $foto);
+            $request->fotoProfessor->move(public_path('imagens/Professor/'), $foto);
+        };
 
-        Professor::find($id)->update([
+
+        $professor->update([
             'nome' => $request->nome,
             'disciplina' => $request->disciplina,
             'foto' => 'imagens/Professor/' . $foto
         ]);
+
+        $professor->contatoProfessor()->update([
+            'telefone' => $request->telefone,
+            'email' => $request->email
+        ]);
+
         return redirect()->route('professor.index');
     }
 

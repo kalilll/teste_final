@@ -18,6 +18,7 @@
                     <option value="{{$curso->id}}">{{$curso->nome}}</option>
                 @endforeach
             </select>
+        </div>
         
         <button class="btn btn-dark" type="submit">Salvar</button>
     </form>

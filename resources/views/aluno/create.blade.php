@@ -16,6 +16,12 @@
             </div>
 
             <div class="form-group">
+                <label for="" >Telefone</label>
+                <input type="text" class="form-control"  name="telefone" id="telefone" placeholder="(00) 00000-0000">
+
+            </div>
+
+            <div class="form-group">
                 <label for="">Email</label>
                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -25,17 +31,10 @@
             </div>
 
             <div  class="form-group">
-             <label for="">Data de Nascimento</label>
+                <label for="">Data de Nascimento</label>
                 <input type="date" class="form-control" name="data_nascimento" id="data_nascimento">  
-            </div> 
-
-            <div class="form-group">
-                <div class="form-control">
-                    <label for="fotoAluno" class="form-label">Foto</label>
-                    <input type="file"  name="fotoAluno" id="fotoAluno">
-                </div>
             </div>
-            
+             
             <div>
                 <label for="">Turma</label>
                 <select class="form-control" name="turma_id" id="turma_id">
@@ -45,12 +44,10 @@
                     @endforeach
                 </select>
             </div>
-            
+            <br> 
             <div class="form-group">
-                <div class="form-control">
-                    <label for="" class="form-label">Telefone</label>
-                    <input type="text"  name="telefone" id="telefone" placeholder="(00) 00000-0000">
-                </div>
+                <label for="fotoAluno" class="form-label">Foto</label>
+                <input type="file"  name="fotoAluno" id="fotoAluno">
             </div>
 
             

@@ -1,27 +1,35 @@
 @extends('layouts.app')
 @section('title','Formulario')
 @section('content')
-    <h1>Cadastro de professores</h1>
+    <h1>Editar Professor</h1>
     <form action="{{route("professor.update", $professor->id)}}" method="post" enctype="multipart/form-data">
         @csrf 
         @method('PUT')
         <div class="form-group">
-        <label for="">Nome</label>
-        <input type="text" name="nome" id="nome" value="{{$professor->nome}}">
+            <label for="">Nome</label>
+            <input type="text" class="form-control" name="nome" id="nome" value="{{$professor->nome}}">
         </div>
 
         <div class="form-group">
-        <label for="">disciplina</label>
-        <input type="text" name="disciplina" id="disciplina" value="{{$professor->disciplina}}">
+            <label for="">Disciplina</label>
+            <input type="text" class="form-control" name="disciplina" id="disciplina" value="{{$professor->disciplina}}">
         </div>
 
         <div class="form-group">
-            <div class="form-control">
-                <label for="fotoProfessor" class="form-label">Foto</label>
-                <input type="file"  name="fotoProfessor" id="fotoProfessor" value="{{$professor->foto}}">
-            </div>
+            <label for="">Telefone</label>
+            <input type="text" class="form-control" name="telefone" id="telefone" value="{{$professor->contatoProfessor->telefone}}">
         </div>
-        <button type="submit">Salvar</button>
+
+        <div class="form-group">
+            <label for="">Email</label>
+            <input type="email" class="form-control" name="email" id="email" value="{{$professor->contatoProfessor->email}}">
+        </div>
+
+        <div class="form-group">
+            <label for="fotoProfessor">Foto</label>
+            <input type="file"  name="fotoProfessor" id="fotoProfessor" value="{{$professor->foto}}">
+        </div>
+        <button class="btn btn-dark" type="submit">Salvar</button>
 
     </form>
 @endsection

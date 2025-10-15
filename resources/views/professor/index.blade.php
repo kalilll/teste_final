@@ -1,13 +1,15 @@
 @extends('layouts.app')
 @section('title','Professor')
 @section('content')
-     <h1>Lista de professor</h1>
+     <h1>Lista de Professores</h1>
      <a class="btn btn-dark" href="{{route('professor.create')}}">Cadastrar</a> <br>
      <br>
     <table class="table table-striped table-hover table-sm">
         <thead class="thead-dark">
             <th>Nome</th>
             <th>Disciplinas</th>
+            <th>Telefone</th>
+            <th>Email</th>
             <th>Opções</th>
         </thead>
         <tbody>
@@ -15,6 +17,8 @@
             <tr>
                 <td>{{$professor->nome}}</td>
                 <td>{{$professor->disciplina}}</td>
+                <td>{{$professor->contatoProfessor->telefone}}</td>
+                <td>{{$professor->contatoProfessor->email}}</td>
                 <td>
                     <div class="d-flex">
                        <div class="m-1">

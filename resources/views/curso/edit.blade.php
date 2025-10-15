@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title','Formulario')
 @section('content')
-    <h1>Editar Aluno</h1>
+    <h1>Editar Curso</h1>
     <form action="{{route("curso.update", $curso->id)}}" method="post" enctype="multipart/form-data">
         @csrf 
         @method('PUT')
