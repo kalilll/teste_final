@@ -45,6 +45,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="https://media.tenor.com/xSXTkAlLjbgAAAAM/homer.gif">Link</a>
             </li>
+
+            <li class='nav-item'>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Sair</button>
+                </form>
+            </li>
         </ul>
     </div>
     @yield('content')
