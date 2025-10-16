@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>@yield('title', 'Sistema de Controle Acadêmico')</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 </head>
 <body>
     <main>
         <div class="container">
     <div>
+        @auth
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"aria-haspopup="true" aria-expanded="false">Aluno</a>
@@ -47,12 +49,16 @@
             </li>
 
             <li class='nav-item'>
+                <div>
+                    {{ Auth::user()->name }}
+                </div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="btn btn-danger">Sair</button>
                 </form>
             </li>
         </ul>
+        @endauth
     </div>
     @yield('content')
 <footer >

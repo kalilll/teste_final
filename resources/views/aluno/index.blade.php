@@ -1,8 +1,14 @@
 @extends('layouts.app')
 @section('title','Listagem de Alunos')
 @section('content')
-    <h1>Lista de Alunos</h1>
+<h1>Lista de Alunos
+        @guest
+            pública
+        @endguest
+    </h1>
+    @auth
     <a class="btn btn-dark" href="{{route('aluno.create')}}">Cadastrar</a>
+    @endauth
     <br>
     <br> 
     <table class="table table-striped table-hover table-sm" >
@@ -13,7 +19,9 @@
             <th>Telefone</th>
             <th>Email</th>
             <th>Data de nascimento</th>
-            <th>Opções</th>
+            @auth
+                <th>Opções</th>
+            @endauth
         </thead>
         <tbody>
             @foreach($alunos as $aluno)
@@ -25,6 +33,7 @@
                 <td>{{$aluno->contatoAluno->telefone}}</td>
                 <td>{{$aluno->email}}</td>
                 <td>{{$aluno->data_nascimento}}</td>
+                @auth     
                 <td>
                     <div class="d-flex">
                         <div class="m-1">
@@ -35,14 +44,15 @@
                         </div>
                         <div class="m-1">
                             <form action="{{route('aluno.destroy' , $aluno->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"> Excluir</button>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"> Excluir</button>
                             </form>
                         </div>
-                    
+                        
                     </div>
                 </td>
+                @endauth
             </tr>
             @endforeach
             @endforeach
