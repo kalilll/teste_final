@@ -13,6 +13,7 @@ class EmpresaController extends Controller
     public function index()
     {
         //
+        
     }
 
     /**
