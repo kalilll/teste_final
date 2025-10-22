@@ -20,23 +20,32 @@
                 <!-- Perfil -->
                 <div class="p-6 h-screen">
                     <div class="flex flex-col items-center">
-
-
+                                            
+                        @auth
                         <img src="{{ Auth::guest() ? asset('imagens/logo/logo_sabor_do_brasil.png') : Auth::user()->foto}}" class="w-24 h-24 rounded-full mb-4 object-cover">
-
 
                         <h2 class="text-xl font-bold text-[#000000]">
                             {{ Auth::guest() ? 'Sabor do Brasil' : Auth::user()->nome }}
                         </h2>
+                        @endauth
+                        @guest
+                        <img src="imagens/logo/logo_sabor_do_brasil.png" class="w-24 h-24 rounded-full mb-4 object-cover">
+
+                        
+                        <h2 class="text-xl font-bold text-[#000000]">
+                            Sabor do Brasil
+                        </h2>
+                        @endguest
 
                         <hr class="mb-4 border-3 border-[#D97014] w-3/4">
-
+                        
                         <div class=" grid grid-cols-2 gap-5">
                             <div class="text-center"><p>Quatidade <br> Likes</p></div>
                             <div class="text-center"><p>Quatidade <br> Deslikes</p></div>
                             
                         </div>
 
+                        
                     </div>
                 </div>
 
@@ -44,43 +53,66 @@
                 <main class="col-span-2 shadow-md p-6 border border-[#C2BEBE]">
                     @yield('content')
                 </main>
+                
+                <div class="flex flex-col items-center justify-between p-6 h-screen">  
 
+                    @auth
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="rounded-md bg-[#D97014] font-bold text-[#FFFFFF] px-20 py-2 text-sm inset-ring inset-ring-white/5">Sair</button>
+                    </form>
+                    @endauth
 
-                <!-- Login -->
-                <div class="bg-white rounded-tr-2xl p-6">
+                    @guest
+                    <button command="show-modal" commandfor="dialog" class="rounded-md bg-[#D97014] font-bold text-[#FFFFFF] px-20 py-2 text-sm inset-ring inset-ring-white/5">Entrar</button>
+                    @endguest
+                    
 
-                    <button command="show-modal" commandfor="dialog" class="rounded-md bg-white/10 px-2.5 py-1.5 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20">Open dialog</button>
                     <el-dialog>
-                    <dialog id="dialog" aria-labelledby="dialog-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
+                        <dialog id="dialog" aria-labelledby="dialog-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
                         <el-dialog-backdrop class="fixed inset-0 bg-gray-900/50 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"></el-dialog-backdrop>
 
                         <div tabindex="0" class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0">
-                        <el-dialog-panel class="relative transform overflow-hidden rounded-lg bg-gray-800 text-left shadow-xl outline -outline-offset-1 outline-white/10 transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
-                            <div class="bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <div class="sm:flex sm:items-start">
-                                <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-500/10 sm:mx-0 sm:size-10">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 text-red-400">
-                                    <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                </div>
-                                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 id="dialog-title" class="text-base font-semibold text-white">Deactivate account</h3>
-                                <div class="mt-2">
-                                    <p class="text-sm text-gray-400">Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.</p>
-                                </div>
+                        <el-dialog-panel class="relative transform overflow-hidden rounded-lg bg-white text-center shadow-xl outline -outline-offset-1 outline-white/10 transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
+                            <div class="bg-white px-2 pt-3 pb-4">
+                            <div class="">
+                                
+                                <div class="mt-3 text-center">
+                                    <h1 id="dialog-title" class="text-base font-semibold text-black">Login</h1>
+                                    <div class="mt-2 px-4">
+                                        <x-auth-session-status class="mb-4" :status="session('status')" />
+                                        <form method="POST" action="{{ route('login') }}">
+                                            @csrf
+                                            
+                                            <!-- Email Address -->
+                                            <div>
+                                                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Digite seu email" />
+                                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                            </div>
+
+                                            <!-- Password -->
+                                            <div class="mt-4">
+                                                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="Digite sua senha" />
+
+                                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                            </div>
+                                            
+                                            <div class="py-3 sm:flex sm:flex-row-reverse">
+                                            <button type="submit" class="inline-flex w-full justify-center rounded-md border bg-[#d97014] px-3 py-2 text-sm font-semibold text-white hover:bg-red-400 sm:ml-3 sm:w-auto">Entrar</button>
+                                            <button type="button" command="close" commandfor="dialog" class="mt-3 inline-flex w-full justify-center rounded-md border border-[#d97014] px-3 py-2 text-sm font-semibold text-black inset-ring inset-ring-white/5 hover:bg-white/20 sm:mt-0 sm:w-auto">Cancelar</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                            <div class="bg-gray-700/25 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                            <button type="button" command="close" commandfor="dialog" class="inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white hover:bg-red-400 sm:ml-3 sm:w-auto">Deactivate</button>
-                            <button type="button" command="close" commandfor="dialog" class="mt-3 inline-flex w-full justify-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20 sm:mt-0 sm:w-auto">Cancel</button>
                             </div>
                         </el-dialog-panel>
-                        </div>
-                    </dialog>
+                    </div>
+                        </dialog>
                     </el-dialog>
-                </div>
 
+                </div>
+                
             </div>
         </div>
 
