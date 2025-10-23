@@ -12,7 +12,8 @@ class PublicacaoController extends Controller
      */
     public function index()
     {
-        //
+        $publicacoes = Publicacao::all();
+        return view('index', compact('publicacoes'));
     }
 
     /**

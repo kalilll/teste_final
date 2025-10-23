@@ -22,19 +22,15 @@
                     <div class="flex flex-col items-center">
                                             
                         @auth
-                        <img src="{{ Auth::guest() ? asset('imagens/logo/logo_sabor_do_brasil.png') : Auth::user()->foto}}" class="w-24 h-24 rounded-full mb-4 object-cover">
+                        <img src="{{ Auth::user()->foto}}" class="w-24 h-24 rounded-full mb-4 object-cover">
 
-                        <h2 class="text-xl font-bold text-[#000000]">
-                            {{ Auth::guest() ? 'Sabor do Brasil' : Auth::user()->nome }}
-                        </h2>
+                        <h2 class="text-xl font-bold text-[#000000]">{{ Auth::user()->nome }}</h2>
                         @endauth
+
                         @guest
                         <img src="imagens/logo/logo_sabor_do_brasil.png" class="w-24 h-24 rounded-full mb-4 object-cover">
-
                         
-                        <h2 class="text-xl font-bold text-[#000000]">
-                            Sabor do Brasil
-                        </h2>
+                        <h2 class="text-xl font-bold text-[#000000]">Sabor do Brasil</h2>
                         @endguest
 
                         <hr class="mb-4 border-3 border-[#D97014] w-3/4">
