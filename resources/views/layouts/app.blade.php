@@ -36,9 +36,19 @@
                         <hr class="mb-4 border-3 border-[#D97014] w-3/4">
                         
                         <div class=" grid grid-cols-2 gap-5">
-                            <div class="text-center"><p>Quatidade <br> Likes</p></div>
-                            <div class="text-center"><p>Quatidade <br> Deslikes</p></div>
-                            
+                            <div class="text-center">
+                                @guest
+                                <p>{{$likes_quant}}</p>
+                                @endguest
+                                <p>Quatidade <br> Likes</p>
+                            </div>
+                            <div class="text-center">
+                                @guest
+                                <p>{{$deslikes_quant}}</p>
+                                @endguest
+                                <p>Quatidade <br> Deslikes</p>
+                            </div>
+                                
                         </div>
 
                         
