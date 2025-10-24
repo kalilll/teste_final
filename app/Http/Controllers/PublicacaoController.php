@@ -18,7 +18,10 @@ class PublicacaoController extends Controller
         $publicacoes = Publicacao::all();
         $likes_quant = Like::count();
         $deslikes_quant = Deslike::count();
-        return view('index', compact('publicacoes', 'likes_quant', 'deslikes_quant'));
+        $likes_quant_user = Like::where('user_id', auth()->id())->count();
+        $deslikes_quant_user = Deslike::where('user_id', auth()->id())->count();
+        
+        return view('index', compact('publicacoes', 'likes_quant', 'deslikes_quant' ,'likes_quant_user', 'deslikes_quant_user'));
     }
 
     public function comentar(Request $request, Publicacao $publicacao)
@@ -34,7 +37,8 @@ class PublicacaoController extends Controller
 
         return back();
     }
-
+    
+    
     public function like(Publicacao $publicacao)
     {
         $user = auth()->user();
@@ -43,6 +47,8 @@ class PublicacaoController extends Controller
         } else {
             $publicacao->likes()->create(['user_id' => $user->id]);
         }
+
+
 
         return back();
     }

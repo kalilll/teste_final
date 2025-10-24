@@ -12,6 +12,8 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+        
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
@@ -38,15 +40,21 @@
                         <div class=" grid grid-cols-2 gap-5">
                             <div class="text-center">
                                 @guest
-                                <p>{{$likes_quant}}</p>
+                                <p class=" font-bold text-[#000000]">{{$likes_quant}}</p>
                                 @endguest
-                                <p>Quatidade <br> Likes</p>
+                                @auth
+                                <p class=" font-bold text-[#000000]">{{$likes_quant_user}}</p>
+                                @endauth
+                                <p class=" font-bold text-[#000000]">Quatidade <br> Likes</p>
                             </div>
                             <div class="text-center">
                                 @guest
-                                <p>{{$deslikes_quant}}</p>
+                                <p class=" font-bold text-[#000000]">{{$deslikes_quant}}</p>
                                 @endguest
-                                <p>Quatidade <br> Deslikes</p>
+                                @auth
+                                <p class=" font-bold text-[#000000]">{{$deslikes_quant_user}}</p>
+                                @endauth
+                                <p class=" font-bold text-[#000000]">Quatidade <br> Deslikes</p>
                             </div>
                                 
                         </div>
@@ -60,6 +68,7 @@
                     @yield('content')
                 </main>
                 
+                <!-- Login -->
                 <div class="flex flex-col items-center justify-between p-6 h-screen">  
 
                     @auth
@@ -105,6 +114,7 @@
                                             
                                             <div class="py-3 sm:flex sm:flex-row-reverse">
                                             <button type="submit" class="inline-flex w-full justify-center rounded-md border bg-[#d97014] px-3 py-2 text-sm font-semibold text-white hover:bg-red-400 sm:ml-3 sm:w-auto">Entrar</button>
+                                            
                                             <button type="button" command="close" commandfor="dialog" class="mt-3 inline-flex w-full justify-center rounded-md border border-[#d97014] px-3 py-2 text-sm font-semibold text-black inset-ring inset-ring-white/5 hover:bg-white/20 sm:mt-0 sm:w-auto">Cancelar</button>
                                             </div>
                                         </form>
