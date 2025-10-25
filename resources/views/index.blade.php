@@ -80,18 +80,40 @@
 
             <div class="space-y-1">
                 @foreach($publicacao->comentarios as $comentario)
-                <div class="border p-2 rounded bg-gray-100 grid grid-cols-3">
-                    <div class="col-span-2">
-                        <strong>{{ $comentario->user->nome }}:</strong> {{ $comentario->comentario }}
+                <div x-data="{ editando: false }" class="border p-2 rounded bg-gray-100 grid grid-cols-3">
+                    <div class="col-span-2 flex gap-2">
+                        <strong class="py-1">{{ $comentario->user->nome }}:</strong> 
+
+                        <span x-show="!editando" class="py-1">{{ $comentario->comentario }}</span>
+
+                        <form x-show="editando" method="POST" action="{{ route('comentarios.update', $comentario) }}" class="flex gap-2">
+                            @csrf
+                            @method('PATCH')
+                            <input type="text" name="comentario" value="{{ $comentario->comentario }}" class="border rounded p-1 flex-1 h-full">
+                            <button type="submit" class="bg-blue-500 text-white px-3 rounded">Comentar</button>
+                        </form>
                     </div>
-                    <div>
-                        <button class="float-right" @click="openedit = !openedit">
-                            <img src="{{ asset('imagens/icones/lixeira_deletar.svg') }}" class="w-4 h-4">
-                        </button>
-                        <button class="float-right mr-2">
-                            <img src="{{ asset('imagens/icones/lapis_editar.svg') }}" class="w-4 h-4">
-                        </button>
+
+
+                    <div class="justify-items-end py-1">
+                        @if(auth()->id() === $comentario->user_id)
+                        <div class="flex gap-2 text-sm">
+                            <button @click="editando = !editando" class="text-blue-600 hover:underline">
+                                <img class="h-4 w-4" src="imagens/icones/lapis_editar.svg">
+                            </button>
+                            
+                            <form method="POST" action="{{ route('comentarios.destroy', $comentario) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class=" hover:underline">
+                                    <img class="pt-1 h-5 w-5" src="imagens/icones/lixeira_deletar.svg">
+                                </button>
+                            </form>
+                        </div>
+                        @endif
                     </div>
+
+
                 </div>
                 @endforeach
             </div>

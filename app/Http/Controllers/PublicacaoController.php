@@ -38,13 +38,44 @@ class PublicacaoController extends Controller
         return back();
     }
     
+    public function atualizarComentario(Request $request, Comentario $comentario)
+    {
+        if ($comentario->user_id !== auth()->id()) {
+            abort(403, 'Acesso negado');
+        }
+
+        $request->validate([
+            'comentario' => 'required|string|max:500',
+        ]);
+
+        $comentario->update([
+            'comentario' => $request->comentario,
+        ]);
+
+        return back()->with('success', 'Comentário atualizado com sucesso!');
+    }
+
+    public function excluirComentario(Comentario $comentario)
+    {
+        if ($comentario->user_id !== auth()->id()) {
+            abort(403, 'Acesso negado');
+        }
+
+        $comentario->delete();
+
+        return back()->with('success', 'Comentário excluído com sucesso!');
+    }
+
     
     public function like(Publicacao $publicacao)
     {
         $user = auth()->user();
         if ($publicacao->likes()->where('user_id', $user->id)->exists()) {
-            $publicacao->likes()->where('user_id', $user->id)->delete(); // deslike
+            $publicacao->likes()->where('user_id', $user->id)->delete();
         } else {
+            if ($publicacao->deslikes()->where('user_id', $user->id)->exists()) {
+                $publicacao->deslikes()->where('user_id', $user->id)->delete();
+            }
             $publicacao->likes()->create(['user_id' => $user->id]);
         }
 
@@ -59,6 +90,9 @@ class PublicacaoController extends Controller
         if ($publicacao->deslikes()->where('user_id', $user->id)->exists()) {
             $publicacao->deslikes()->where('user_id', $user->id)->delete(); // remove deslike
         } else {
+            if ($publicacao->likes()->where('user_id', $user->id)->exists()) {
+                $publicacao->likes()->where('user_id', $user->id)->delete();
+            }
             $publicacao->deslikes()->create(['user_id' => $user->id]);
         }
 
