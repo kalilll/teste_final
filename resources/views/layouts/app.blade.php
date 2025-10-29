@@ -101,8 +101,8 @@
                                             
                                             <!-- Email Address -->
                                             <div>
-                                                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Digite seu email" />
-                                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                                <x-text-input id="nickname" class="block mt-1 w-full" type="text" name="nickname" :value="old('nickname')" required autofocus autocomplete="username" placeholder="Digite seu nickname" />
+                                                <x-input-error :messages="$errors->get('nickname')" class="mt-2" />
                                             </div>
 
                                             <!-- Password -->
